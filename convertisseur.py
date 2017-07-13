@@ -71,8 +71,7 @@ def convertEURToUSD(montant, reverse):
         resultat = montant * 1.14
     else:
         resultat = montant / 1.14
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertCHFToJPY(montant, reverse):
     """ Convertie le CHF en JPY 
@@ -81,8 +80,7 @@ def convertCHFToJPY(montant, reverse):
         resultat = montant * 118.1
     else:
         resultat = montant / 118.1
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertUSDToGBP(montant, reverse):
     """    Convertie l'USD en GBP
@@ -91,8 +89,7 @@ def convertUSDToGBP(montant, reverse):
         resultat = montant * 0.776
     else:
         resultat = montant / 0.776
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertJPYToGBP(montant, reverse):
     """ Convertie le JPY en GBP
@@ -101,8 +98,7 @@ def convertJPYToGBP(montant, reverse):
         resultat = montant * 0.007
     else:
         resultat = montant / 0.007
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertEURToGBP(montant, reverse):
     """ Convertie l'EUR en GBP """
@@ -110,8 +106,7 @@ def convertEURToGBP(montant, reverse):
         resultat = convertUSDToGBP(convertEURToUSD(montant, False), False)
     else:
         resultat = convertEURToUSD(convertUSDToGBP(montant, True), True)
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertEURToCHF(montant, reverse):
     """ Convertie l'EUR en CHF """
@@ -119,8 +114,7 @@ def convertEURToCHF(montant, reverse):
         resultat = convertCHFToJPY(convertEURToJPY(montant, False), True)
     else:
         resultat = convertEURToJPY(convertCHFToJPY(montant, False), True)
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertEURToJPY(montant, reverse):
     """ Convertie l'EUR en JPY """
@@ -128,7 +122,7 @@ def convertEURToJPY(montant, reverse):
         resultat = convertJPYToGBP(convertEURToGBP(montant, False), True)
     else:
         resultat = convertEURToGBP(convertJPYToGBP(montant, False), True)
-    return trunc(resultat * 1000) / 1000
+    return resultat
 
 
 def convertCHFToUSD(montant, reverse):
@@ -137,8 +131,7 @@ def convertCHFToUSD(montant, reverse):
         resultat = convertUSDToJPY(convertCHFToJPY(montant, False), True)
     else:
         resultat = convertCHFToJPY(convertUSDToJPY(montant, False), True)
-    return trunc(resultat * 1000) / 1000
-
+    return resultat
 
 def convertCHFToGBP(montant, reverse):
     """ Convertie le CHF en GBP """
@@ -146,7 +139,7 @@ def convertCHFToGBP(montant, reverse):
         resultat = convertJPYToGBP(convertCHFToJPY(montant, False), False)
     else:
         resultat = convertCHFToJPY(convertJPYToGBP(montant, True), True)
-    return trunc(resultat * 1000) / 1000
+    return resultat
 
 
 def convertUSDToJPY(montant, reverse):
@@ -155,7 +148,7 @@ def convertUSDToJPY(montant, reverse):
         resultat = convertJPYToGBP(convertUSDToGBP(montant, False), True)
     else:
         resultat = convertUSDToGBP(convertJPYToGBP(montant, False), True)
-    return trunc(resultat * 1000) / 1000
+    return resultat
 
 
 def test():
@@ -210,6 +203,6 @@ if __name__ == "__main__":
     args[1:] = [item.upper() for item in args[1:]]
 
     if(set(args[1:]).issubset(["EUR", "JPY", "USD", "GBP", "CHF"])):
-        print (convert(args))
+        print (trunc(convert(args)*1000) /1000)
     else:
         print("conversion impossible")
